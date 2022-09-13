@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Script with a configuration to connect to a server without typing a password
+
+Host 3.80.109.167
+	PasswordAuthentication no
+	IdentityFile ~/.ssh/school
