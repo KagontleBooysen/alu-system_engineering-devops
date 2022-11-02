@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# Script Bash que configura una nueva máquina Ubuntu para
-# respetar los requisitos anteriores
+# installing nginx
+
 sudo apt-get -y update
 sudo apt-get -y install nginx
-sudo chown -R ubuntu /var/www
-echo "Hello World" > /var/www/html/index.nginx-debian.html
+echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
 service nginx start
