@@ -1,16 +1,24 @@
 #!/usr/bin/env bash
-# Installs Nginx with the following configurations:
-# Configures /redirect_me as a "301 Moved Permanently".
-# Includes a custom 404 page containing "Ceci n'est pas une page".
+# Configures NGINX server to display custom 404 page
+# Page contains the text "Ceci n'est pas une page"
+sudo apt update
+sudo apt install nginx -y
+sudo touch /var/www/html/index.html
+sudo touch /var/www/html/error404.html
+echo "Holberton School" | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/error404.html
 
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y install nginx
-sudo service nginx start
-
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
-newlines="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}"
-sudo sed -i "27i $newlines" /etc/nginx/sites-available/default
+printf %s "server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.html;
+        error_page 404 /error404.html;
+        server_name _;
+        location /redirect_me {
+           return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/;
+        }
+}
+" | sudo tee /etc/nginx/sites-available/default
 
 sudo service nginx restart
-sudo service nginx reload
