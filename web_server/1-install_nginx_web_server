@@ -1,6 +1,30 @@
-#!/usr/bin/env bash
-# Script that installs Nginx server
-apt-get -y update
-apt-get -y install nginx
-echo "Holberton School" > /var/www/html/index.nginx-debian.html
-sudo service nginx restart
+# This is another way of doing this challenge by writing the content directly to the the default index.html
+# sudo apt-get -y update && \
+# sudo apt-get -y install nginx
+# if [ $? -eq 0 ];
+# then
+#     sudo chown -R $USER:$USER /etc/nginx/nginx.conf
+#     sudo echo -e \
+#     "http {
+#         server {
+#             listen 80;
+#             location / {
+#                 root /var/www/astrobooysen.site
+#             }
+#         }
+#     }" > /etc/nginx/nginx.conf
+#    sudo mkdir -p /var/www/astrobooysen.site
+#    sudo chown -R $USER:$USER /var/www/astrobooysen.site
+#    sudo echo "Holberton School" > /var/www/astrobooysen.site/index.html
+
+#     sudo service nginx start
+#     if [ $? -ne 0 ]
+#     then
+#         echo  "Can't start nginx"
+#         exit 1
+#     fi
+# else
+#     echo "Can't install nginx"
+#     exit 1
+# fi
+# echo "Holberton School"i
