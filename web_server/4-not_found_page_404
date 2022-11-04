@@ -1,22 +1,23 @@
 #!/usr/bin/env bash
-# script that install nginx and configure it to return custom 404 page not found erorr
-sudo apt update -y
+# comment
+sudo apt update
 sudo apt install nginx -y
-echo "Ceci n'est pas une page" > /var/www/html/error404.html &&
-# store configuration content
-new_config=\
-"server {
+sudo touch /var/www/html/index.html
+sudo touch /var/www/html/error404.html
+echo "Holberton School" | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/error404.html
+
+printf %s "server {
         listen 80 default_server;
         listen [::]:80 default_server;
         root /var/www/html;
-        index index.html index.htm index.nginx-debian.html;
+        index index.html;
         error_page 404 /error404.html;
         server_name _;
-        location / {
-                try_files \$uri \$uri/ =404;
+        location /redirect_me {
+           return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4/;
         }
 }
-"
-sudo chown -R "$USER":"$USER" /etc/nginx/sites-available/default
-echo "$new_config" > /etc/nginx/sites-available/default
+" | sudo tee /etc/nginx/sites-available/default
+
 sudo service nginx restart
