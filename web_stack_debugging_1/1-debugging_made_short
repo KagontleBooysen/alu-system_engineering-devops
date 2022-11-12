@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-#  please seriously your boring nginx server listen on port 80, shorter version
-sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-pkill -1 nginx
+# setting nginx configuration file with default settings
+cat /etc/nginx/sites-available/default > /etc/nginx/sites-enabled/default
+service nginx restart
+rm /run/nginx.pid
